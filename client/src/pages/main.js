@@ -20,7 +20,7 @@ class Main extends Component {
     getResults = () => {
         api.getTwits(this.state.stockSymbol)
             .then(response => {
-                this.setState({ twits: response.data.messages })
+                this.setState({ twits: response.data })
             })
             .catch(e => {
                 this.setState({ twits: [], stockSymbol: '' })
@@ -39,8 +39,8 @@ class Main extends Component {
         if (this.state.stockSymbol) {
             api.getTwits(this.state.stockSymbol)
                 .then(async response => {
-                    while ((i < response.data.messages.length) && (response.data.messages[i].id) > this.state.twits[0].id) {
-                        newTwitsStack.push(response.data.messages[i])
+                    while ((i < response.data.length) && (response.data[i].id) > this.state.twits[0].id) {
+                        newTwitsStack.push(response.data[i])
                         i++;
                     }
                     if (newTwitsStack.length > 0) {
