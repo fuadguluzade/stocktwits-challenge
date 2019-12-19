@@ -5,7 +5,7 @@ export default props => {
         <form>
             <div className="form-group">
                 <label htmlFor="stock-symbol">Enter stock symbols</label>
-                <input onChange={props.handleInput} type="text" className="form-control" id="stock-symbol" placeholder="Stock symbol" />
+                <input onChange={props.handleInput} type="text" className="form-control" id="stock-symbol" placeholder="Stock symbol"/>
             </div>
         </form>
     )

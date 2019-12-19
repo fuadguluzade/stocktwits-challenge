@@ -1,15 +1,23 @@
 import React from "react";
+import './style.css';
 
 export default props => {
     return (
         props.twits ?
             props.twits.map(twit => {
                 return (
-                    <div className="twit-card" key={twit.id}>
-                        <div className="user-name">{twit.user.username}</div>
-                        <div className="user-avatar">{twit.user.avatar_url}</div>
-                        <div className="twit-date">{twit.created_at}</div>
-                        <div className="twit-body">{twit.body}</div>
+                    <div key={twit.id} className="tweetHolder" style={{ width: "58rem" }}>
+                        <div className="tweetEntry">
+                            <div className="content">
+                                <div className="header">
+                                    <img className="avatar" src={twit.user.avatar_url} alt="user_avatar" />
+                                    <span className="fullname">{twit.user.name}</span>
+                                    <span className="username">@{twit.user.username}</span>
+                                    <span className="timestamp">- {new Date(twit.created_at).toLocaleString()}</span>
+                                </div>
+                                <p className="twit-text">{twit.body}</p>
+                            </div>
+                        </div>
                     </div>
                 )
             })
@@ -17,3 +25,4 @@ export default props => {
             <h1>No twits found</h1>
     )
 }
+
