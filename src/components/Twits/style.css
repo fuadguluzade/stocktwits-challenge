@@ -1,31 +1,23 @@
 .tweetHolder {
-  border-left: 1px solid #e1e8ed;
-  border-right: 1px solid #e1e8ed;
-  border-top: 1px solid #e1e8ed;
-  width: 588px;
+  border: 1px solid #e1e8ed;
+  max-width: 960px;
+  width: 90%;
+  font-size: 14px;
   margin: auto;
   border-radius: 5px;
   margin-bottom: 1rem;
-}
-
-.tweetEntry {
-  border-bottom: 1px solid #e1e8ed;
   min-height: 51px;
   padding: 9px 12px;
 }
 
 .content {
   display: block;
-  font-size: 14px;
   margin-left: 58px;
-  font-size: 14px;
 }
 
 .header {
   color: #8899a6;
   padding: 0px;
-  text-decoration: none;
-  line-height: 20px;
 }
 
 .avatar {
@@ -39,7 +31,6 @@
 
 .fullname {
   font-weight: bold;
-  font-size: 14px;
   margin-right: 3px;
   color: #292f33;
   padding: 0px;
@@ -47,20 +38,23 @@
 
 .username {
   font-weight: bold;
-  font-size: 14px;
   margin-right: 3px;
   color: #b1bbc3;
   padding: 0px;
 }
 
 .timestamp {
-  font-size: 14px;
   color: #b1bbc3;
   padding: 0px;
 }
 
 .twit-text {
-  font-size: 14px;
   color: #292f33;
   line-height: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+  .tweetHolder {
+    overflow-wrap: break-word;
+  }
 }

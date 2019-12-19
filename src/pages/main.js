@@ -14,7 +14,7 @@ class Main extends Component {
     }
 
     componentDidMount = () => {
-        setInterval(this.isThereNew, 300000) // checks for the new tweet every 5 minute
+        setInterval(this.isThereNew, 60000) // checks for the new tweet every 5 minute
     }
 
     getResults = () => {
@@ -35,19 +35,17 @@ class Main extends Component {
     }
 
     isThereNew = () => {
+        let newTwitsStack = [];
+        let i = 0;
         if (this.state.stockSymbol) {
             api.getTwits(this.state.stockSymbol)
-                .then(response => {
-                    console.log(this.state.twits.length )
-                    console.log(response.data.messages.length)
-                    if (this.state.twits.length === response.data.messages.length) {
-                        for (let i = 0; i < this.state.twits.length; i++) {
-                            if (this.state.twits[i].id !== response.data.messages[i].id) {
-                                this.getResults();
-                            }
-                        }
-                    } else {
-                        this.getResults();
+                .then(async response => {
+                    while ((i < response.data.messages.length) && (response.data.messages[i].id) > this.state.twits[0].id) {
+                        newTwitsStack.push(response.data.messages[i])
+                        i++;
+                    }
+                    if (newTwitsStack.length > 0) {
+                        this.setState({ twits: newTwitsStack.concat(this.state.twits) })
                     }
                 })
         }
