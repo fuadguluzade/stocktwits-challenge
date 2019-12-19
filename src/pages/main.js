@@ -14,13 +14,12 @@ class Main extends Component {
     }
 
     componentDidMount = () => {
-        setInterval(this.isThereNew, 60000) // checks for the new tweet every 5 minute
+        setInterval(this.isThereNew, 60000) // checks for the new tweet every minute
     }
 
     getResults = () => {
         api.getTwits(this.state.stockSymbol)
             .then(response => {
-                console.log(response.data.messages);
                 this.setState({ twits: response.data.messages })
             })
             .catch(e => {
