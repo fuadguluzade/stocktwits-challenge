@@ -1,29 +1,13 @@
-# Create React Express App
+# Stocktwits-challenge
 
-## About This Boilerplate
+## About
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+Application allows user to input a US stock symbol or several symbols (eg: AAPL, BABA, BAC, etc…) and pull tweets from StockTwits that mention this symbol, then displays the latest matching tweets.
+When a new tweet comes in, it automatically added, without having to refresh a page.
+The user is able to later add/remove symbols as well. If a user deletes a symbol, the matching tweets also disappear.
+The page is responsive.
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
-
-## Starting the app locally
-
-Start by installing front and backend dependencies. While in this directory, run the following command:
-
-```
-npm install
-```
-
-This should install node modules within the server and the client folder.
-
-After both installations complete, run the following command in your terminal:
-
-```
-npm start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+## Technologies used
+* react.js
+* express.js
+* stocktwits api
