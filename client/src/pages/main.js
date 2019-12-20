@@ -10,7 +10,8 @@ import api from "./../utils/api";
 class Main extends Component {
     state = {
         stockSymbol: '',
-        twits: []
+        twits: [],
+        newTwitsCount: 0
     }
 
     componentDidMount = () => {
@@ -23,7 +24,7 @@ class Main extends Component {
                 this.setState({ twits: response.data })
             })
             .catch(e => {
-                this.setState({ twits: [], stockSymbol: '' })
+                this.setState({ twits: [], stockSymbol: '', newTwitsCount: 0 })
                 console.log(e)
             });
     }
@@ -31,20 +32,21 @@ class Main extends Component {
     handleInput = async event => {
         await this.setState({ stockSymbol: event.target.value })
         this.getResults();
+        this.setState({ newTwitsCount: 0 })
     }
 
     isThereNew = () => {
-        let newTwitsStack = [];
         let i = 0;
+        let newTwitsQueue = [];
         if (this.state.stockSymbol) {
             api.getTwits(this.state.stockSymbol)
                 .then(async response => {
                     while ((i < response.data.length) && (response.data[i].id) > this.state.twits[0].id) {
-                        newTwitsStack.push(response.data[i])
+                        newTwitsQueue.push(response.data[i])
                         i++;
                     }
-                    if (newTwitsStack.length > 0) {
-                        this.setState({ twits: newTwitsStack.concat(this.state.twits) })
+                    if (newTwitsQueue.length > 0) {
+                        this.setState({ twits: newTwitsQueue.concat(this.state.twits), newTwitsCount: this.state.newTwitsCount + newTwitsQueue.length })
                     }
                 })
         }
@@ -55,8 +57,7 @@ class Main extends Component {
             <div>
                 <Header />
                 <Container>
-                    <InputForm handleInput={this.handleInput} />
-                    <p>{this.state.twits.length} results found</p>
+                    <InputForm twits={this.state.twits} handleInput={this.handleInput} newTwitsCount={this.state.newTwitsCount} />
                     <Twits twits={this.state.twits} />
                 </Container>
             </div>
